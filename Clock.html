@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #clock {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Real-Time Digital Clock ⏰</h2>
+    
+    <!-- Clock Display -->
+    <div id="clock">00:00:00</div>
+    
+    <!-- Start/Stop Button -->
+    <button id="toggleClock">Start Clock</button>
+
+    <script>
+        let clockInterval;
+        let isRunning = false;
+
+        function updateClock() {
+            let now = new Date();
+            let hours = String(now.getHours()).padStart(2, "0");
+            let minutes = String(now.getMinutes()).padStart(2, "0");
+            let seconds = String(now.getSeconds()).padStart(2, "0");
+            document.getElementById("clock").innerHTML = `${hours}:${minutes}:${seconds}`;
+        }
+
+        document.getElementById("toggleClock").addEventListener("click", function() {
+            if (!isRunning) {
+                clockInterval = setInterval(updateClock, 1000);
+                this.textContent = "Stop Clock";
+            } else {
+                clearInterval(clockInterval);
+                this.textContent = "Start Clock";
+            }
+            isRunning = !isRunning;
+        });
+    </script>
+
+</body>
+</html>
